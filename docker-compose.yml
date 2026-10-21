@@ -1,0 +1,14 @@
+services:
+  web:
+    image: ghcr.io/chairilrafi11/nolsatu-web:latest
+    container_name: nolsatu-web
+    restart: unless-stopped
+    env_file: [.env]
+    ports: ["127.0.0.1:3171:80"]
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+      com.centurylinklabs.watchtower.scope: "homelab-apps"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/"]
+      interval: 30s
+      retries: 3

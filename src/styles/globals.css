@@ -1,0 +1,515 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   NolSatu — Design tokens
+   Arah: "Workbook" — kertas hangat, tinta gelap, aksen pine. Terasa seperti buku
+   kerja teknik: tenang, padat, jujur. Bukan gradient, bukan glass.
+   ============================================================================ */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* accent — pine */
+  --primary: #1f6f5c;
+  --primary-hover: #185a4a;
+  --primary-soft: #e3efe9;
+  --on-primary: #ffffff;
+  --on-primary-soft: #12463a;
+
+  /* accent ke-2 — clay (penanda track kedua, angka, metrik) */
+  --secondary: #a2603f;
+  --secondary-soft: #f6e9e1;
+  --on-secondary: #ffffff;
+  --on-secondary-soft: #6d3c24;
+
+  /* paper surfaces */
+  --surface: #f6f4ee;
+  --surface-raised: #fffdf8;
+  --surface-sunken: #eeece3;
+  --surface-line: #e2dfd2;
+  --surface-line-strong: #cdc9b8;
+
+  /* ink */
+  --on-surface: #1b1c19;
+  --on-surface-variant: #55574f;
+  --on-surface-faint: #83857a;
+
+  /* semantic */
+  --success: #2f6e4f;
+  --success-soft: #e4efe8;
+  --success-fg: #1f4e37;
+  --warning: #96601a;
+  --warning-soft: #f8eeda;
+  --warning-fg: #6f4510;
+  --danger: #a3342a;
+  --danger-soft: #f8e4e1;
+  --danger-fg: #7a241c;
+  --info: #35648c;
+  --info-soft: #e4edf5;
+  --info-fg: #234869;
+
+  --radius: 14px;
+  --radius-sm: 10px;
+  --radius-lg: 20px;
+
+  --shadow-subtle: 0 1px 2px rgba(27, 28, 25, 0.05), 0 1px 1px rgba(27, 28, 25, 0.03);
+  --shadow-card: 0 2px 4px rgba(27, 28, 25, 0.05), 0 8px 20px -12px rgba(27, 28, 25, 0.18);
+  --shadow-floating: 0 12px 32px -12px rgba(27, 28, 25, 0.28);
+
+  color-scheme: light;
+}
+
+.dark {
+  --primary: #74c3a8;
+  --primary-hover: #8fd2bb;
+  --primary-soft: #1c3a31;
+  --on-primary: #0b241d;
+  --on-primary-soft: #c8e8db;
+
+  --secondary: #d9a179;
+  --secondary-soft: #3a2a1f;
+  --on-secondary: #2a1a10;
+  --on-secondary-soft: #f0d8c6;
+
+  --surface: #141613;
+  --surface-raised: #1c1f1b;
+  --surface-sunken: #101210;
+  --surface-line: #2c302a;
+  --surface-line-strong: #42473d;
+
+  --on-surface: #e9e9e2;
+  --on-surface-variant: #a8aa9e;
+  --on-surface-faint: #7b7e71;
+
+  --success: #7fc9a3;
+  --success-soft: #1c3528;
+  --success-fg: #a6dfc0;
+  --warning: #e0b257;
+  --warning-soft: #362a14;
+  --warning-fg: #f0cd87;
+  --danger: #e3897e;
+  --danger-soft: #3a1f1c;
+  --danger-fg: #f5b3aa;
+  --info: #94bedd;
+  --info-soft: #1a2a37;
+  --info-fg: #bcd8ee;
+
+  --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.35), 0 8px 20px -12px rgba(0, 0, 0, 0.6);
+  --shadow-floating: 0 12px 32px -12px rgba(0, 0, 0, 0.7);
+
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
+  --color-on-primary: var(--on-primary);
+  --color-on-primary-soft: var(--on-primary-soft);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-soft: var(--secondary-soft);
+  --color-on-secondary: var(--on-secondary);
+  --color-on-secondary-soft: var(--on-secondary-soft);
+
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-surface-line: var(--surface-line);
+  --color-surface-line-strong: var(--surface-line-strong);
+
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-on-surface-faint: var(--on-surface-faint);
+
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-success-fg: var(--success-fg);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-warning-fg: var(--warning-fg);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-danger-fg: var(--danger-fg);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-info-fg: var(--info-fg);
+
+  --radius: var(--radius);
+  --radius-sm: var(--radius-sm);
+  --radius-lg: var(--radius-lg);
+
+  --shadow-subtle: var(--shadow-subtle);
+  --shadow-card: var(--shadow-card);
+  --shadow-floating: var(--shadow-floating);
+}
+
+@layer base {
+  * {
+    border-color: var(--surface-line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--surface);
+    color: var(--on-surface);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--primary-soft);
+    color: var(--on-primary-soft);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--surface-line-strong);
+    border: 3px solid var(--surface);
+    border-radius: 999px;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+}
+
+/* ============================================================================
+   Utilities
+   ============================================================================ */
+
+/* Hairline grid background untuk area hero — sangat tipis, bukan gradient. */
+.bg-grid {
+  background-image: linear-gradient(to right, var(--surface-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--surface-line) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Eyebrow / label teknis */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--on-surface-faint);
+}
+
+/* Angka besar teknis (progress, skor) */
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fadeUp {
+  animation: fade-up 0.45s cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.animate-fadeIn {
+  animation: fade-in 0.25s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-fadeUp,
+  .animate-fadeIn {
+    animation: none;
+  }
+}
+
+/* ============================================================================
+   Markdown prose (materi bab)
+   Token-driven, tanpa plugin typography.
+   ============================================================================ */
+
+.prose-nolsatu {
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--on-surface);
+  max-width: 72ch;
+}
+
+.prose-nolsatu > * + * {
+  margin-top: 1rem;
+}
+
+.prose-nolsatu h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-top: 2.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--surface-line);
+}
+.prose-nolsatu h1:first-child {
+  margin-top: 0;
+}
+
+.prose-nolsatu h2 {
+  font-size: 1.25rem;
+  font-weight: 750;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+  margin-top: 2.25rem;
+  scroll-margin-top: 6rem;
+}
+
+.prose-nolsatu h3 {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  margin-top: 1.75rem;
+  scroll-margin-top: 6rem;
+}
+
+.prose-nolsatu h4 {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--on-surface-variant);
+  margin-top: 1.5rem;
+}
+
+.prose-nolsatu p {
+  color: var(--on-surface);
+}
+
+.prose-nolsatu strong {
+  font-weight: 700;
+  color: var(--on-surface);
+}
+
+.prose-nolsatu a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.prose-nolsatu a:hover {
+  color: var(--primary-hover);
+}
+
+.prose-nolsatu ul,
+.prose-nolsatu ol {
+  padding-left: 1.25rem;
+}
+.prose-nolsatu ul {
+  list-style: disc;
+}
+.prose-nolsatu ol {
+  list-style: decimal;
+}
+.prose-nolsatu li + li {
+  margin-top: 0.375rem;
+}
+.prose-nolsatu li::marker {
+  color: var(--on-surface-faint);
+}
+
+.prose-nolsatu blockquote {
+  border-left: 3px solid var(--primary);
+  background: var(--primary-soft);
+  padding: 0.875rem 1rem;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--on-primary-soft);
+}
+.prose-nolsatu blockquote p {
+  color: inherit;
+}
+
+.prose-nolsatu code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--surface-sunken);
+  border: 1px solid var(--surface-line);
+  padding: 0.1em 0.35em;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+.prose-nolsatu pre {
+  position: relative;
+  background: var(--surface-sunken);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-sm);
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+  font-size: 0.8125rem;
+  line-height: 1.65;
+}
+.dark .prose-nolsatu pre {
+  background: #0d0f0d;
+  border-color: var(--surface-line);
+}
+.prose-nolsatu pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-size: inherit;
+  white-space: pre;
+}
+
+.prose-nolsatu table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  display: block;
+  overflow-x: auto;
+}
+.prose-nolsatu thead {
+  background: var(--surface-sunken);
+}
+.prose-nolsatu th {
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--on-surface-variant);
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--surface-line);
+  white-space: nowrap;
+}
+.prose-nolsatu td {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--surface-line);
+  vertical-align: top;
+}
+.prose-nolsatu tbody tr:nth-child(even) {
+  background: color-mix(in oklab, var(--surface-sunken) 55%, transparent);
+}
+
+.prose-nolsatu hr {
+  border: 0;
+  border-top: 1px solid var(--surface-line);
+  margin: 2rem 0;
+}
+
+.prose-nolsatu details {
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-sm);
+  background: var(--surface-raised);
+  padding: 0.75rem 1rem;
+}
+.prose-nolsatu details + details {
+  margin-top: 0.5rem;
+}
+.prose-nolsatu summary {
+  cursor: pointer;
+  font-weight: 650;
+  font-size: 0.875rem;
+  color: var(--on-surface-variant);
+  list-style: none;
+}
+.prose-nolsatu summary::-webkit-details-marker {
+  display: none;
+}
+.prose-nolsatu summary::before {
+  content: "▸ ";
+  color: var(--primary);
+  font-family: var(--font-mono);
+}
+.prose-nolsatu details[open] > summary::before {
+  content: "▾ ";
+}
+.prose-nolsatu details[open] > summary {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--surface-line);
+}
+
+/* syntax highlight (highlight.js, palet pine/clay) */
+.prose-nolsatu .hljs-comment,
+.prose-nolsatu .hljs-quote {
+  color: #83857a;
+  font-style: italic;
+}
+.prose-nolsatu .hljs-keyword,
+.prose-nolsatu .hljs-selector-tag,
+.prose-nolsatu .hljs-literal,
+.prose-nolsatu .hljs-type {
+  color: #1f6f5c;
+  font-weight: 600;
+}
+.dark .prose-nolsatu .hljs-keyword,
+.dark .prose-nolsatu .hljs-selector-tag,
+.dark .prose-nolsatu .hljs-literal,
+.dark .prose-nolsatu .hljs-type {
+  color: #7fd0b4;
+}
+.prose-nolsatu .hljs-string,
+.prose-nolsatu .hljs-attr,
+.prose-nolsatu .hljs-addition {
+  color: #a2603f;
+}
+.dark .prose-nolsatu .hljs-string,
+.dark .prose-nolsatu .hljs-attr {
+  color: #e0a67f;
+}
+.prose-nolsatu .hljs-number,
+.prose-nolsatu .hljs-symbol {
+  color: #7a5aa8;
+}
+.dark .prose-nolsatu .hljs-number,
+.dark .prose-nolsatu .hljs-symbol {
+  color: #c4a8ea;
+}
+.prose-nolsatu .hljs-title,
+.prose-nolsatu .hljs-name,
+.prose-nolsatu .hljs-function {
+  color: #35648c;
+  font-weight: 600;
+}
+.dark .prose-nolsatu .hljs-title,
+.dark .prose-nolsatu .hljs-name,
+.dark .prose-nolsatu .hljs-function {
+  color: #9cc2e0;
+}
+.prose-nolsatu .hljs-built_in,
+.prose-nolsatu .hljs-variable {
+  color: #96601a;
+}
+.dark .prose-nolsatu .hljs-built_in,
+.dark .prose-nolsatu .hljs-variable {
+  color: #e0b257;
+}
+.prose-nolsatu .hljs-deletion {
+  color: #a3342a;
+}
